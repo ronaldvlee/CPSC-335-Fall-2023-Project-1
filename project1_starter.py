@@ -49,17 +49,16 @@ def schedule_meeting(person1_aval: List[List[int]], person2_aval: List[List[int]
     """Given two avaliabile timeslots (in minute units) """
     aval_times = []
 
-    for start1, end1 in person1_aval:
+    for start1, end1 in person1_aval:           # these two for loops will go through both avaliabilities
         for start2, end2 in person2_aval:
-            common_start = max(start1, start2)
+
+            common_start = max(start1, start2) 
             common_end = min(end1, end2)
 
             if common_end - common_start >= duration:
                 aval_times.append([convert_to_timestr(common_start), convert_to_timestr(common_end)])
 
     return aval_times
-
-
 
 # TODO: change it to taking an input file and sort into those variables
 person1_busy_Schedule = [ ['12:00', '13:00'], ['16:00', '18:00']]
