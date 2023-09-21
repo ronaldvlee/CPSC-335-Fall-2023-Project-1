@@ -28,5 +28,5 @@ Above, encased in the brackets is our imaginary schedule. All we have to do is g
 We can then find the availability of the two by finding the max of the start and the minimum of the end of the two availabilities. We also need to check if the duration of the availability can fit the duration of the meeting.
 
 ## Authors
-Ronald Lee (ronaldvlee@csu.fullerton.edu)
-Israel Faulmino ()
+- Ronald Lee (ronaldvlee@csu.fullerton.edu)
+- Israel Faulmino ()

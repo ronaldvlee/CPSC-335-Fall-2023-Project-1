@@ -13,8 +13,8 @@ def convert_to_timestr(time_in_mins: int) -> str:
     return f'{hr:02d}:{mins:02d}'
 
 def find_aval_timeslots(busy_sch: List[List[str]], work_hrs: List[str], duration: int) -> List[List[int]]:
-    """Finds all avaliable timeslots that the person has given their busy schedule and workhours."""
-    aval_sch = [] # initalize empty list to push the avaliable times into
+    """Finds all available timeslots that the person has given their busy schedule and workhours."""
+    aval_sch = [] # initalize empty list to push the available times into
 
     busy_sch_mins = [ [convert_to_mins(start), convert_to_mins(end)] for start, end in busy_sch ] # converting the time str to time in mins
     
@@ -40,19 +40,19 @@ def find_aval_timeslots(busy_sch: List[List[str]], work_hrs: List[str], duration
     if busy_sch_mins[-1][1] < work_end:
         aval_sch.append([busy_sch_mins[-1][1], work_end])
 
-    # Now since we do not care for the avaliability that cannot fit the meeting. We can just filter through those
+    # Now since we do not care for the availability that cannot fit the meeting. We can just filter through those
     # and make a new list for the times that actually fit.
     return [time for time in aval_sch if time[1] - time[0] >= duration]
 
-# takes two avaliablities, and returns the avaliable timeslots given duration
+# takes two availablities, and returns the available timeslots given duration
 def schedule_meeting(person1_aval: List[List[int]], person2_aval: List[List[int]], duration: int) -> List[List[str]]:
-    """Given two avaliabile timeslots (in minute units) """
+    """Given two availabile timeslots (in minute units) and duration of the meeting, returns the available timeslots."""
     aval_times = []
 
-    for start1, end1 in person1_aval:           # these two for loops will go through both avaliabilities
+    for start1, end1 in person1_aval:           # these two for loops will go through both availabilities
         for start2, end2 in person2_aval:
 
-            common_start = max(start1, start2) 
+            common_start = max(start1, start2)  
             common_end = min(end1, end2)
 
             if common_end - common_start >= duration:
