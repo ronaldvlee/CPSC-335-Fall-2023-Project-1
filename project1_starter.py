@@ -44,7 +44,6 @@ def find_aval_timeslots(busy_sch: List[List[str]], work_hrs: List[str], duration
     # and make a new list for the times that actually fit.
     return [time for time in aval_sch if time[1] - time[0] >= duration]
 
-# takes two availablities, and returns the available timeslots given duration
 def schedule_meeting(person1_aval: List[List[int]], person2_aval: List[List[int]], duration: int) -> List[List[str]]:
     """Given two availabile timeslots (in minute units) and duration of the meeting, returns the available timeslots."""
     aval_times = []
@@ -61,11 +60,12 @@ def schedule_meeting(person1_aval: List[List[int]], person2_aval: List[List[int]
     return aval_times
 
 # TODO: change it to taking an input file and sort into those variables
-person1_busy_Schedule = [ ['12:00', '13:00'], ['16:00', '18:00']]
+# TODO: create test cases for this
+person1_busy_Schedule = [ ['12:19', '13:00'], ['16:00', '18:25']]
 person1_work_hours = ['9:00', '19:00']
-person2_busy_Schedule = [[ '9:00', '10:30'], ['12:20', '14:30'], ['14:30', '15:00'], ['16:00', '17:00']]
+person2_busy_Schedule = [[ '9:00', '10:15'], ['12:20', '14:30'], ['14:30', '15:00'], ['16:00', '17:00']]
 person2_work_hours = ['9:00', '18:30']
-duration_of_meeting = 30
+duration_of_meeting = 1
 
 person1_aval = find_aval_timeslots(person1_busy_Schedule, person1_work_hours, duration_of_meeting)
 person2_aval = find_aval_timeslots(person2_busy_Schedule, person2_work_hours, duration_of_meeting)
