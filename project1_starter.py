@@ -1,18 +1,19 @@
+from input_parser import parseInput
 from typing import List
 
-def convert_to_mins(time_str: str) -> int:
+def convert_to_mins(time_str: str) -> int: # O(1)
     """Takes in time in 'hh:mm' format and converts it to minutes of the day."""
     hr, mins = map(int, time_str.split(':'))
     return hr * 60 + mins
 
-def convert_to_timestr(time_in_mins: int) -> str:
+def convert_to_timestr(time_in_mins: int) -> str: # O(1)
     """Takes in time in minutes of the day and converts it to a hh:mm format."""
     hr = time_in_mins // 60
     mins = time_in_mins % 60
 
     return f'{hr:02d}:{mins:02d}'
 
-def find_aval_timeslots(busy_sch: List[List[str]], work_hrs: List[str], duration: int) -> List[List[int]]:
+def find_aval_timeslots(busy_sch: List[List[str]], work_hrs: List[str], duration: int) -> List[List[int]]: # O(n)
     """Finds all available timeslots that the person has given their busy schedule and workhours."""
     aval_sch = [] # initalize empty list to push the available times into
 
@@ -44,14 +45,14 @@ def find_aval_timeslots(busy_sch: List[List[str]], work_hrs: List[str], duration
     # and make a new list for the times that actually fit.
     return [time for time in aval_sch if time[1] - time[0] >= duration]
 
-def schedule_meeting(person1_aval: List[List[int]], person2_aval: List[List[int]], duration: int) -> List[List[str]]:
+def schedule_meeting(person1_aval: List[List[int]], person2_aval: List[List[int]], duration: int) -> List[List[str]]: # O(n^2)
     """Given two availabile timeslots (in minute units) and duration of the meeting, returns the available timeslots."""
     aval_times = []
 
     for start1, end1 in person1_aval:           # these two for loops will go through both availabilities
         for start2, end2 in person2_aval:
 
-            common_start = max(start1, start2)  
+            common_start = max(start1, start2)
             common_end = min(end1, end2)
 
             if common_end - common_start >= duration:
@@ -59,16 +60,16 @@ def schedule_meeting(person1_aval: List[List[int]], person2_aval: List[List[int]
 
     return aval_times
 
-# TODO: change it to taking an input file and sort into those variables
-# TODO: create test cases for this
-person1_busy_Schedule = [ ['12:19', '13:00'], ['16:00', '18:25']]
-person1_work_hours = ['9:00', '19:00']
-person2_busy_Schedule = [[ '9:00', '10:15'], ['12:20', '14:30'], ['14:30', '15:00'], ['16:00', '17:00']]
-person2_work_hours = ['9:00', '18:30']
-duration_of_meeting = 1
+data = parseInput('input.txt')
 
-person1_aval = find_aval_timeslots(person1_busy_Schedule, person1_work_hours, duration_of_meeting)
-person2_aval = find_aval_timeslots(person2_busy_Schedule, person2_work_hours, duration_of_meeting)
+for sch in data:
+    person1_busy_Schedule = sch[0]
+    person1_work_hours = sch[1]
+    person2_busy_Schedule = sch[2]
+    person2_work_hours = sch[3]
+    duration_of_meeting = sch[4]
 
-#print(person2_aval)
-print(schedule_meeting(person1_aval, person2_aval, duration_of_meeting))
+    person1_aval = find_aval_timeslots(person1_busy_Schedule, person1_work_hours, duration_of_meeting)
+    person2_aval = find_aval_timeslots(person2_busy_Schedule, person2_work_hours, duration_of_meeting)
+
+    print(schedule_meeting(person1_aval, person2_aval, duration_of_meeting))
