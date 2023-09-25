@@ -15,9 +15,9 @@ def parse_input(fileName: str):
                 converted_data = ast.literal_eval(line)
                 sch.append(converted_data)
 
-                 # when the parser detects that the converted line is an int
-                 # (the duration of the meeting) it is done with the five
-                 # and it will start anew
+                # when the parser detects that the converted line is an int
+                # (the duration of the meeting) it is done with the five
+                # and it will start anew
                 if isinstance(converted_data, int):
                     data.append(sch)
                     sch = []

@@ -1,4 +1,3 @@
-from parse_input import parse_input
 from typing import List
 
 def convert_to_mins(time_str: str) -> int: # O(1)
@@ -45,18 +44,51 @@ def find_aval_timeslots(busy_sch: List[List[str]], work_hrs: List[str], duration
     # and make a new list for the times that actually fit.
     return [time for time in aval_sch if time[1] - time[0] >= duration]
 
-def schedule_meeting(person1_aval: List[List[int]], person2_aval: List[List[int]], duration: int) -> List[List[str]]: # O(n^2)
-    """Given two availabile timeslots (in minute units) and duration of the meeting, returns the available timeslots."""
+def schedule_meeting(person1_aval: List[List[int]], person2_aval: List[List[int]], duration: int) -> List[List[str]]: # O(n)
+    """Given two available timeslots (in minute units) and duration of the meeting, returns the available timeslots."""
     aval_times = []
 
-    for start1, end1 in person1_aval:           # these two for loops will go through both availabilities
-        for start2, end2 in person2_aval:
+    # Now that we have the availability of both people, all we need to do is loop through both lists
+    # and link up the two availiabilities.
 
-            common_start = max(start1, start2)
-            common_end = min(end1, end2)
+    # To visualize the problem:
+    #   Person 1 avail: [------     --      --------    ------]
+    #   Person 2 avail: [ ------         ------     -----     ]
+    #   Intersecting av:[ #####             ###         #     ]
+    # Lets say that the dotted lines are the timeslots free and lets say that the duration
+    # of the meeting is 3 dashes (---), the length of the meeting can fit within 3 of the (#).
+    # 
+    # All we must do is match up the latest start time of the availibility, to the earliest end time 
+    i, j = 0, 0
+    while i < len(person1_aval) and j < len(person2_aval):
+        start1, end1 = person1_aval[i]
+        start2, end2 = person2_aval[j]
 
-            if common_end - common_start >= duration:
-                aval_times.append([convert_to_timestr(common_start), convert_to_timestr(common_end)])
+        common_start = max(start1, start2)  # latest start time
+        common_end = min(end1, end2)        # earliest end time
+
+        # Now that we have commonality, we can eliminate the meeting times that do not fit the duration
+        if common_end - common_start >= duration:
+            aval_times.append([convert_to_timestr(common_start), convert_to_timestr(common_end)])
+
+        # Since we are only working with one loop we need to make sure we are iterating through the
+        # loop correctly.
+
+        if end1 < end2: # this ensures that we go through each potentially overlapping timeslot
+            i += 1
+        else:
+            j += 1
+
+
+    # for start1, end1 in person1_aval:           # these two for loops will go through both availabilities
+    #     for start2, end2 in person2_aval:
+
+    #         common_start = max(start1, start2)  # latest start time
+    #         common_end = min(end1, end2)        # earliest end time
+
+    #         # now that we have commonality, we can eliminate the meeting times that do not fit the duration
+    #         if common_end - common_start >= duration:
+    #             aval_times.append([convert_to_timestr(common_start), convert_to_timestr(common_end)])
 
     return aval_times
 
