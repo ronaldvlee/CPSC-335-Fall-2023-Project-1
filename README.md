@@ -27,6 +27,11 @@ Above, encased in the brackets is our imaginary schedule. All we have to do is g
 ### Lastly:
 We can then find the availability of the two by finding the max of the start and the minimum of the end of the two availabilities. We also need to check if the duration of the availability can fit the duration of the meeting.
 
+## Running Instructions
+
+1. Have Python 3.11.5 installed.
+2. Run `py .\main.py` in terminal.
+
 ## Authors
 - Ronald Lee (ronaldvlee@csu.fullerton.edu)
 - Israel Faulmino ()
