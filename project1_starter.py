@@ -79,7 +79,7 @@ def schedule_meeting(person1_aval: List[List[int]], person2_aval: List[List[int]
         else:
             j += 1
 
-
+    # Less efficient but viable way to find the intersecting times.
     # for start1, end1 in person1_aval:           # these two for loops will go through both availabilities
     #     for start2, end2 in person2_aval:
 
