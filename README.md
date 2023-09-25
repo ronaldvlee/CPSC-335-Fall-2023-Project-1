@@ -30,7 +30,7 @@ We can then find the availability of the two by finding the max of the start and
 ## Running Instructions
 
 1. Have Python 3.11.5 installed.
-2. Run `py .\main.py` in terminal.
+2. Run `py .\main.py` (or `python .\main.py` depending on how PATH is setup) in terminal.
 
 ## Authors
 - Ronald Lee (ronaldvlee@csu.fullerton.edu)
