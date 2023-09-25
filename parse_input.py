@@ -1,6 +1,6 @@
 import ast
 
-def parseInput(fileName: str):
+def parse_input(fileName: str):
     data = []
 
     # Read input.txt line by line

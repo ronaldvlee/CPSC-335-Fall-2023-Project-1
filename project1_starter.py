@@ -1,4 +1,4 @@
-from input_parser import parseInput
+from parse_input import parse_input
 from typing import List
 
 def convert_to_mins(time_str: str) -> int: # O(1)
@@ -60,7 +60,7 @@ def schedule_meeting(person1_aval: List[List[int]], person2_aval: List[List[int]
 
     return aval_times
 
-data = parseInput('input.txt')
+data = parse_input('input.txt')
 
 for sch in data:
     person1_busy_Schedule = sch[0]
