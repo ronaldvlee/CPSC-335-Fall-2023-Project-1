@@ -34,4 +34,4 @@ We can then find the availability of the two by finding the max of the start and
 
 ## Authors
 - Ronald Lee (ronaldvlee@csu.fullerton.edu)
-- Israel Faulmino ()
+- Israel Faulmino (ifaulmino@csu.fullerton.edu)
